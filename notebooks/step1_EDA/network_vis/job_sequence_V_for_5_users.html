@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1>Job Event(V) Sequences: 5 users</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1>Job Event(V) Sequences: 5 users</h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1200px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "accounts receivable", "label": "accounts receivable", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "multiple stores opening", "label": "multiple stores opening", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "oshc", "label": "oshc", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "management accountant", "label": "management accountant", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "business development manager", "label": "business development manager", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "expressions of interest", "label": "expressions of interest", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "mr truck driver labourer", "label": "mr truck driver labourer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "business sales team leader", "label": "business sales team leader", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "service advisor", "label": "service advisor", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "digital assistant", "label": "digital assistant", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "office administrator", "label": "office administrator", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "licenced cadastral surveyor", "label": "licenced cadastral surveyor", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "operations manager", "label": "operations manager", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "agricultural salesperson", "label": "agricultural salesperson", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "practice manager", "label": "practice manager", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "it support", "label": "it support", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "personal care assistants", "label": "personal care assistants", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "team members", "label": "team members", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "pipe fitters", "label": "pipe fitters", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "hr administrator", "label": "hr administrator", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "beauty therapists", "label": "beauty therapists", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "senior financial analyst", "label": "senior financial analyst", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "product support coordinator", "label": "product support coordinator", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "project architect or experienced graduate", "label": "project architect or experienced graduate", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "steel fixers", "label": "steel fixers", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "early childhood educator", "label": "early childhood educator", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "project manager", "label": "project manager", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "administration assistant and bookkeeper", "label": "administration assistant and bookkeeper", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "folder", "label": "folder", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "project officer", "label": "project officer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "recruitment administrator", "label": "recruitment administrator", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "mortgage broker", "label": "mortgage broker", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "finance", "label": "finance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "sales", "label": "sales", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "inbound customer care specialist", "label": "inbound customer care specialist", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "marketing executive", "label": "marketing executive", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "chef de cuisine", "label": "chef de cuisine", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "store manager", "label": "store manager", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "annual service technician", "label": "annual service technician", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "technology enhanced learning", "label": "technology enhanced learning", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "labour", "label": "labour", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "customer service officer", "label": "customer service officer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "administration officer", "label": "administration officer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "casual youth support worker", "label": "casual youth support worker", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "charity brand ambassadors", "label": "charity brand ambassadors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "civil design engineer", "label": "civil design engineer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "collections officer", "label": "collections officer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "early learning and care services operations coordinator", "label": "early learning and care services operations coordinator", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "delivery test manager", "label": "delivery test manager", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "youth trainer ttw", "label": "youth trainer ttw", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "accounts receivable", "to": "multiple stores opening", "width": 1}, {"arrows": "to", "from": "multiple stores opening", "to": "oshc", "width": 1}, {"arrows": "to", "from": "management accountant", "to": "business development manager", "width": 1}, {"arrows": "to", "from": "business development manager", "to": "expressions of interest", "width": 1}, {"arrows": "to", "from": "mr truck driver labourer", "to": "business sales team leader", "width": 1}, {"arrows": "to", "from": "business sales team leader", "to": "service advisor", "width": 1}, {"arrows": "to", "from": "oshc", "to": "digital assistant", "width": 1}, {"arrows": "to", "from": "office administrator", "to": "licenced cadastral surveyor", "width": 1}, {"arrows": "to", "from": "operations manager", "to": "agricultural salesperson", "width": 1}, {"arrows": "to", "from": "agricultural salesperson", "to": "practice manager", "width": 1}, {"arrows": "to", "from": "digital assistant", "to": "it support", "width": 1}, {"arrows": "to", "from": "personal care assistants", "to": "team members", "width": 1}, {"arrows": "to", "from": "pipe fitters", "to": "hr administrator", "width": 1}, {"arrows": "to", "from": "hr administrator", "to": "accounts receivable", "width": 1}, {"arrows": "to", "from": "practice manager", "to": "beauty therapists", "width": 1}, {"arrows": "to", "from": "beauty therapists", "to": "senior financial analyst", "width": 1}, {"arrows": "to", "from": "product support coordinator", "to": "mr truck driver labourer", "width": 1}, {"arrows": "to", "from": "project architect or experienced graduate", "to": "steel fixers", "width": 1}, {"arrows": "to", "from": "steel fixers", "to": "early childhood educator", "width": 1}, {"arrows": "to", "from": "project manager", "to": "administration assistant and bookkeeper", "width": 1}, {"arrows": "to", "from": "administration assistant and bookkeeper", "to": "folder", "width": 1}, {"arrows": "to", "from": "project officer", "to": "management accountant", "width": 1}, {"arrows": "to", "from": "recruitment administrator", "to": "mortgage broker", "width": 1}, {"arrows": "to", "from": "mortgage broker", "to": "finance", "width": 1}, {"arrows": "to", "from": "sales", "to": "recruitment administrator", "width": 1}, {"arrows": "to", "from": "senior financial analyst", "to": "inbound customer care specialist", "width": 1}, {"arrows": "to", "from": "service advisor", "to": "marketing executive", "width": 1}, {"arrows": "to", "from": "early childhood educator", "to": "chef de cuisine", "width": 1}, {"arrows": "to", "from": "store manager", "to": "annual service technician", "width": 1}, {"arrows": "to", "from": "annual service technician", "to": "technology enhanced learning", "width": 1}, {"arrows": "to", "from": "technology enhanced learning", "to": "personal care assistants", "width": 1}, {"arrows": "to", "from": "finance", "to": "product support coordinator", "width": 1}, {"arrows": "to", "from": "labour", "to": "operations manager", "width": 1}, {"arrows": "to", "from": "folder", "to": "customer service officer", "width": 1}, {"arrows": "to", "from": "it support", "to": "administration officer", "width": 1}, {"arrows": "to", "from": "expressions of interest", "to": "sales", "width": 1}, {"arrows": "to", "from": "casual youth support worker", "to": "charity brand ambassadors", "width": 1}, {"arrows": "to", "from": "charity brand ambassadors", "to": "labour", "width": 1}, {"arrows": "to", "from": "chef de cuisine", "to": "project officer", "width": 1}, {"arrows": "to", "from": "civil design engineer", "to": "pipe fitters", "width": 1}, {"arrows": "to", "from": "collections officer", "to": "early learning and care services operations coordinator", "width": 1}, {"arrows": "to", "from": "early learning and care services operations coordinator", "to": "delivery test manager", "width": 1}, {"arrows": "to", "from": "customer service officer", "to": "project architect or experienced graduate", "width": 1}, {"arrows": "to", "from": "delivery test manager", "to": "office administrator", "width": 1}, {"arrows": "to", "from": "youth trainer ttw", "to": "collections officer", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
