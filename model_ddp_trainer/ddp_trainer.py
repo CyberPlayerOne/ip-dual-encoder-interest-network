@@ -324,7 +324,7 @@ if __name__ == '__main__':
         my_train_config['mlflow_tracking_uri'] = 'http://127.0.0.1:5000'
         my_train_config["tensorboard_log_dir"] = '/home/ubuntu/tbruns'
     else:
-        my_train_config['dataset_dict_s3_path'] = '/opt/project/data/input_processed_output(P1N1)/final_dataset_dict/'  # Mapped path in local Docker container4
+        my_train_config['dataset_dict_s3_path'] = '/opt/project/data/input_processed_output(P1N1)/final_dataset_dict/'  # Mapped path in local Docker container
         my_train_config['mlflow_tracking_uri'] = 'http://192.168.1.245:5001'
         my_train_config["tensorboard_log_dir"] = '/opt/project/tbruns'
 
