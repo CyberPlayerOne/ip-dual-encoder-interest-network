@@ -33,8 +33,6 @@ class CustomCollateFunc:
             tokenizer_checkpoint,
             tokenizer_model_max_length=MAX_LEN
     ):
-        pass
-
         # # https://huggingface.co/jjzha/jobbert-base-cased
         # checkpoint = 'jjzha/jobbert-base-cased'
         checkpoint = tokenizer_checkpoint
